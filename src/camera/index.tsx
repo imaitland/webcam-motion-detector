@@ -2,6 +2,7 @@ import React from "react";
 import {TRequestedMedia, useUserMedia} from "../hooks/use-user-media";
 import useVideo from '../hooks/use-video';
 import useVideoCanvas from '../hooks/use-video-canvas';
+import useWindowDimensions from '../hooks/use-window-dimensions';
 
 export type TCameraProps = {}
 
@@ -14,7 +15,10 @@ export function Camera() {
 
   const mediaStream = useUserMedia(CAPTURE_OPTIONS)
   const vid = useVideo(mediaStream)
-  const canv = useVideoCanvas(vid.ref.current)
+  const {width} = useWindowDimensions()
+  const mediaTrackSettings = mediaStream && mediaStream.getVideoTracks()[0].getSettings()
+  const canv = useVideoCanvas({video: vid.ref.current, enableDiff: true,
+  mediaTrackSettings: mediaTrackSettings, width: width})
 
   return (
     <div>
