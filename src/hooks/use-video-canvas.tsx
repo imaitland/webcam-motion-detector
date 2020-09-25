@@ -29,7 +29,7 @@ export default function ({video, enableDiff, mediaTrackSettings, width} : TArgs)
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, [video])
+  }, [video, height, mediaTrackSettings, width])
 
   if (!video) {
     return null
