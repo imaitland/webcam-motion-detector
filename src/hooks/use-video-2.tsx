@@ -1,11 +1,13 @@
-import React, { useEffect, useRef} from 'react'
+import React, { VideoHTMLAttributes, useEffect, useRef} from 'react'
 
-export default function (srcObject: MediaStream | undefined) {
+
+export const useVideo2 = (srcObject: MediaStream | undefined): HTMLVideoElement
+| null => {
   
   const refVideo = useRef<HTMLVideoElement>(null)
+  const vid = refVideo.current
 
   useEffect(() => {
-    const vid = refVideo.current
     if (!vid) return
     try {
       if(srcObject) {
@@ -15,11 +17,7 @@ export default function (srcObject: MediaStream | undefined) {
       console.log('[ ERROR ]',error)
       vid.src = window.URL.createObjectURL(srcObject);
     }
-  }, [srcObject])
+  }, [srcObject, vid])
 
-  return ( {
-      video: <video autoPlay ref={refVideo} />,
-      ref: refVideo
-    }
-  )
+  return refVideo.current
 }

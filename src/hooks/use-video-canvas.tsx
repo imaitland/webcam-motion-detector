@@ -1,10 +1,6 @@
 import React, { CanvasHTMLAttributes, useEffect, useRef } from 'react'
 
-type PropsType = CanvasHTMLAttributes<HTMLCanvasElement> & {
-  video: HTMLVideoElement | null
-}
-
-export default function ({video, ...props }: PropsType) {
+export default function (video: HTMLVideoElement | null) {
   const refCanvas = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -26,5 +22,10 @@ export default function ({video, ...props }: PropsType) {
     return () => clearInterval(interval);
   }, [video])
 
-  return <canvas ref={refCanvas} {...props} />
+  if (!video) {
+    return null
+  }
+
+  return <canvas  ref={refCanvas} />
 }
+

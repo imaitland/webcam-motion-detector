@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useRef} from "react";
 import {TRequestedMedia, useUserMedia} from "../hooks/use-user-media";
-import { useVideo } from '../hooks/use-video';
-import { Video } from "../video";
+import useVideo from '../hooks/use-video';
+import useVideoCanvas from '../hooks/use-video-canvas';
 
 export type TCameraProps = {}
 
@@ -14,17 +14,13 @@ export function Camera() {
 
   const mediaStream = useUserMedia(CAPTURE_OPTIONS)
   const vid = useVideo(mediaStream)
-
-
-  if (!mediaStream) {
-    return null;
-  }
-
+  const canv = useVideoCanvas(vid.ref.current)
 
   return (
     <div>
       <div>
-        {vid}
+        {vid.video}
+        {canv}
       </div>
     </div>
   );
