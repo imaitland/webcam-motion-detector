@@ -12,7 +12,9 @@
     "@types/react-dom": "^16.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-measure": "^2.5.2",
     "react-scripts": "3.4.3",
+    "react-webcam": "^5.2.0",
     "typescript": "~3.7.2"
   },
   "scripts": {
@@ -35,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-measure": "^2.0.6"
   }
 }
