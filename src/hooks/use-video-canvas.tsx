@@ -14,24 +14,27 @@ export default function ({video, enableDiff, mediaTrackSettings, width} : TArgs)
 
   useEffect(() => {
     const canvas = refCanvas.current
+    let prevDiff = enableDiff
+
     if (!canvas) return
+
     canvas.width = width
     canvas.height = height
     const context = canvas.getContext('2d')
-    const interval = setInterval(() => {
-      try {
-        if (context && enableDiff) {
-          context.globalCompositeOperation = 'difference';
-        }
-        if (context && video && mediaTrackSettings) {
+
+    if (context && video) {
+      
+      const interval = setInterval(() => {
           context.drawImage(video, 0, 0, width,
           height) 
-        }
-      } catch (error) {
-        console.log('[ ERROR ]',error)
-      }
-    }, 1000);
-    return () => clearInterval(interval);
+          // Flip flop the canvas composition to stop it from diffing on a
+          // difference composition.
+          context.globalCompositeOperation = prevDiff ? 'difference' :
+          'source-over';
+          prevDiff = !prevDiff
+      }, 1000);
+      return () => clearInterval(interval);
+    }
   }, [video, height, mediaTrackSettings, width, enableDiff])
 
   if (!video) {
