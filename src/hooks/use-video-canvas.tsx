@@ -15,11 +15,14 @@ export default function ({video, enableDiff, mediaTrackSettings, width} : TArgs)
   useEffect(() => {
     const canvas = refCanvas.current
     if (!canvas) return
+    canvas.width = width
+    canvas.height = height
+    const context = canvas.getContext('2d')
     const interval = setInterval(() => {
       try {
-        canvas.width = width
-        canvas.height = height
-        const context = canvas.getContext('2d')
+        if (context && enableDiff) {
+          context.globalCompositeOperation = 'difference';
+        }
         if (context && video && mediaTrackSettings) {
           context.drawImage(video, 0, 0, width,
           height) 
@@ -29,7 +32,7 @@ export default function ({video, enableDiff, mediaTrackSettings, width} : TArgs)
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, [video, height, mediaTrackSettings, width])
+  }, [video, height, mediaTrackSettings, width, enableDiff])
 
   if (!video) {
     return null
