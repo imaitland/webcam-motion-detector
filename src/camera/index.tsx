@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React from "react";
 import {TRequestedMedia, useUserMedia} from "../hooks/use-user-media";
 import useVideo from '../hooks/use-video';
 import useVideoCanvas from '../hooks/use-video-canvas';

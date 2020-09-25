@@ -1,4 +1,4 @@
-import React, { CanvasHTMLAttributes, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 export default function (video: HTMLVideoElement | null) {
   const refCanvas = useRef<HTMLCanvasElement>(null)
@@ -7,12 +7,10 @@ export default function (video: HTMLVideoElement | null) {
     const canvas = refCanvas.current
     if (!canvas) return
     const interval = setInterval(() => {
-      console.log('INTERVAL')
       try {
         const context = canvas.getContext('2d')
-        console.log(video)
         if (context && video) {
-          console.log('DRAWING')
+          // access video width and height...
           context.drawImage(video, 0, 0, 640, 480)
         }
       } catch (error) {
