@@ -55,9 +55,8 @@ export default function ({video, enableDiff, mediaTrackSettings, width} : TArgs)
               const sum = sumRgb(imageData, width, height)
               const diff = sum - prevSum
               prevSum = sum
-              console.log('DIFF: ', Math.abs(diff))
               if (Math.abs(diff) > motion_threshold){
-                console.log('MOTION DETECTED!')
+                console.log('[ INFO ] zenomorph detected.')
               }
             }
             // Flip-flop the canvas composition to stop it from diffing on a
