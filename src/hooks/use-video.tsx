@@ -18,7 +18,7 @@ export default function (srcObject: MediaStream | undefined) {
   }, [srcObject])
 
   return ( {
-      video: <video width="100%" autoPlay ref={refVideo} />,
+      video: <video width="100%" autoPlay muted playsInline ref={refVideo} />,
       ref: refVideo
     }
   )
